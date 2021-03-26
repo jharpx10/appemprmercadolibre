@@ -13,7 +13,6 @@ function App() {
 
   return (
     <div>
-     <h1>Chekyyyy hello world</h1>
     <Router>
      <Switch>
        
