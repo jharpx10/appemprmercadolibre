@@ -11,6 +11,8 @@ class Product extends React.Component {
 
         const { name,imageUrl,sellerNickame,price,id} = this.props
         return (
+
+            
             <Link to={`/products/details/${id}`}>
             <Card style={{ width: "18rem" }}>
                 <Card.Img src={imageUrl} style={{ width: "300px", height: "300px" }}>

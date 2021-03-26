@@ -21,6 +21,12 @@ class ProductsCointainer extends React.Component {
             pageCount: 0,
             isFetch: true,
         }
+       
+    }
+
+
+    start=async()=>{
+
     }
 
     handleSearch = async (search) => {
@@ -56,7 +62,7 @@ class ProductsCointainer extends React.Component {
                 {
                     (!isFetch && !products.length) && 'No products founded, try another search'
                 }
-z
+
 
                 <Grid container spacing={2}>
                     {
@@ -78,6 +84,7 @@ z
                 </Grid>
 
                 <ReactPaginate
+                
                     previousLabel={"Anterior"}
                     nextLabel={"Siguiente"}
                     pageCount={pageCount}
