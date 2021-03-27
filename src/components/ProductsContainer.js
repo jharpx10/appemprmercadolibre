@@ -56,11 +56,11 @@ class ProductsCointainer extends React.Component {
                 <Search handleSearch={this.handleSearch} />
 
                 {
-                    isFetch && 'Loading...'
+                    isFetch && 'Cargando...'
                 }
 
                 {
-                    (!isFetch && !products.length) && 'No products founded, try another search'
+                    (!isFetch && !products.length) && 'No se encontraron productos, intenta otra búsqueda'
                 }
 
 
@@ -86,6 +86,7 @@ class ProductsCointainer extends React.Component {
 
                 </Grid>
                 <br />
+                {products.length&&
                 <ReactPaginate
 
                     previousLabel={"Anterior"}
@@ -97,8 +98,7 @@ class ProductsCointainer extends React.Component {
                     pageLinkClassName={"btn btn-outline-secondary"}
                     activeLinkClassName={"btn btn-dark"}
                     onPageChange={this.handlePagination}
-                />
-
+                />}
             </div>
 
         )
