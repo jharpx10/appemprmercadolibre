@@ -26,7 +26,6 @@ class ProductsCointainer extends React.Component {
 
     start = async () => {
         const responseJson = await getFirstProducts();
-        console.log(await responseJson.search)
         this.setState({ products: responseJson.results, isFetch: false, pageCount: responseJson.pageCount, search: responseJson.search })
     }
 
