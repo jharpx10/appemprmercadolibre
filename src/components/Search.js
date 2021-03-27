@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Input from './Input'
 
 class Search extends React.Component {
   constructor (props) {
@@ -17,25 +18,19 @@ class Search extends React.Component {
     const { search } = this.state
 
     return (
-      <nav className="navbar navbar-dark bg-dark">
-
-
-    <a class="navbar-brand" href="">
-      <img src="" alt="" width="30" height="24"/>
-    </a>
+      <div>
+   
+     
+ <div class="d-flex translate-middle col-6 p-3 mx-auto">
   
-        <div className="d-flex">
+      <Input 
+       search={search}
+       handleSearch={handleSearch}
+       handleChange={this.handleChange} />
+    <button className="btn btn-outline-dark ml-1" onClick={() => handleSearch(search)}>Buscar</button>
+    </div>
 
-
-        <input
-          value={search}
-          onChange={this.handleChange}
-          className="form-control me-2"
-          type="text"
-        />
-        <button className="btn btn-dark" onClick={() => handleSearch(search)}>Buscar</button>
-        </div>
-      </nav>
+    </div>
     )
   }
 }

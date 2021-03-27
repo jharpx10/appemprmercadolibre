@@ -1,11 +1,9 @@
 import { getSellerNicknameById } from './sellerServices'
-import { sendAPIQgetJSON } from './infraestructureServices'
-
+import { sendAPIQgetJSON,getRandomArbitrary} from './infraestructureServices'
+import { totalProductsStrategy } from './strategy'
 
 const baseUrl = 'https://api.mercadolibre.com/'
 const productsPerPage = 9;
-
-
 
 export async function getProductsBySearch(searchQuery) {
   const responseJson = await sendAPIQgetJSON(`${baseUrl}sites/MCO/search?q=${searchQuery}&offset=0&limit=${productsPerPage}`)
@@ -15,22 +13,6 @@ export async function getProductsBySearch(searchQuery) {
   await setSellersNickname(await responseJson.results)
   return await responseJson
 }
-
-export async function totalProductsStrategy(paginInfo) {
-  const paginTotal = await paginInfo.total;
-  const paginPR = await paginInfo.primary_results;
-
-  const totalP =await  noAccesTokenTotalProductsStrategy(await paginTotal, await paginPR)
-      return await totalP
-}
-
-export async function noAccesTokenTotalProductsStrategy(paginTotal,paginPR) {
-  if(await paginTotal>await paginPR){
-    return await paginPR
-  }
-  return await paginTotal;
-}
-
 
 export async function getProductDescription(productId) {
   const description = await sendAPIQgetJSON(`${baseUrl}items/${productId}/description`)
@@ -43,7 +25,6 @@ export async function getProductReviews(productId) {
 }
 
 export async function getProductDetails(productId) {
-
   const gDetails = await getProductGeneralDetails(productId)
   gDetails.description = await getProductDescription(productId)
   gDetails.reviews = await getProductReviews(productId)
@@ -67,6 +48,21 @@ async function setSellersNickname(results) {
 async function setSellerNickname(productInfo) {
   productInfo.sellerNickname = await getSellerNicknameById(productInfo.seller.id)
   return await productInfo
+}
+
+export async function getFirstProducts() {
+  const categories = await getCategories();
+  const categoriesSize = await categories.length;
+  const numberSelected = getRandomArbitrary(0, await categoriesSize);
+  const category = await categories[await numberSelected];
+  const query = await category.name;
+  const responseJson = await getProductsBySearch(await query)
+  responseJson.search=await query;
+  return await responseJson
+}
+async function getCategories() {
+  const responseJSon = await sendAPIQgetJSON(`${baseUrl}sites/MCO/categories`)
+  return await responseJSon
 }
 
 export async function getProductsByPagination(page, search) {

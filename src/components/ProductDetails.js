@@ -9,9 +9,7 @@ function ProductDetails() {
   const { id } = useParams();
 
   React.useEffect(() => {
-
     getProductD()
-
   }, [])
 
 
@@ -29,16 +27,41 @@ function ProductDetails() {
   return (
 
 
-    <div>
+    <div  class="container-md">
+
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-6 mx-auto">
+      <img src={productDetails.picture} width="100%" height="100%"/>
+    </div>
+    <div class="col-md-4">
+      <div class="card-body">
+        <h2 class="card-title">{productDetails.title}</h2>
+        <Rating value={productDetails.rra} name="size-large"  size="large" />
+        <h3 class="card-text"><small class="text-muted"> {productDetails.sellerNickname}</small></h3>
+        <h1 class="card-text">{Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+  
+    // These options are needed to round to whole numbers if that's what you want.
+    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  }).format(productDetails.price)}</h1>
+          
+      </div>
+    </div>
+  </div>
+</div>
     
       
-      <h1>{productDetails.title}</h1>
-      <img src={productDetails.picture} class="img-fluid" alt="..."></img>
-      <div>Precio: {productDetails.price}</div>
-      <div>Vendedor: {productDetails.sellerNickname}</div>
-      <Rating disabled name={'rating'} value={productDetails.rra} size={'small'} />
-      <p class="lh-sm">{productDetails.description}</p>
+  
+     
       
+      <div class="col-md-11 mx-auto">
+      
+        <h1>Descripción</h1>
+      <p class="lh-sm">{productDetails.description}</p>
+      </div>
       </div>
       
    

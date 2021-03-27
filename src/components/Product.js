@@ -1,40 +1,53 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Card } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
-
+import {NavLink} from 'react-router-dom'
+import { formatter } from '../services/infraestructureServices'
 
 class Product extends React.Component {
 
   
     render() {
+        
+        
 
         const { name,imageUrl,sellerNickame,price,id} = this.props
+      
+
         return (
 
+           
             
-            <Link to={`/products/details/${id}`}>
-            <Card style={{ width: "18rem" }}>
-                <Card.Img src={imageUrl} style={{ width: "300px", height: "300px" }}>
+            
+            <Card style={{ width: "90%" }} >
+                <NavLink
+            
+            
+            to={`/products/details/${id}`}><Card.Img className={"mx-auto"} src={imageUrl} style={{ width: "100%", height: "300px" }}>
 
                 </Card.Img>
+                </NavLink>
                 <Card.Body>
-                    <Card.Title>
+                    <strong><Card.Title>
                         {name}
-                    </Card.Title>
+                    </Card.Title></strong>
 
-                    <Card.Text>
-                        Precio: {price} <br/> 
-             Vendedor: {sellerNickame}
+                    <Card.Text className={"buy-price"}>
+                     Vendido por {sellerNickame}<br/> 
+                        <h4 class="mt-2">{formatter.format(price)} </h4>
                     </Card.Text>
 
                 </Card.Body>
 
             </Card>
-            </Link>)
+          )
 
 
     }
+
+
+
+    
 }
 
 Product.propTypes = {
